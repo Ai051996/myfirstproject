@@ -54,11 +54,13 @@
 
   /* Main Content */
   #mainContent {
+
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-end; /* top and bottom */
     min-height: 100vh;
-    padding: 20px 10px 60px; /* add bottom padding for spacing */
+    padding: 80px; /* add bottom padding for spacing */
     box-sizing: border-box;
     opacity: 0;
     transition: opacity 2s ease;
@@ -96,8 +98,7 @@
 
   /* Message */
   p {
-    margin: 0;
-    text-align: left;
+    margin: 0 auto; 
     max-width: 90%;
     font-size: 1.3em;
     line-height: 1.4;
