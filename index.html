@@ -56,9 +56,10 @@
   #mainContent {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* top and bottom */
+    justify-content: flex-end; /* top and bottom */
     min-height: 100vh;
-    padding-bottom: 50px; /* space from bottom */
+    padding: 20px 10px 60px; /* add bottom padding for spacing */
+    box-sizing: border-box;
     opacity: 0;
     transition: opacity 2s ease;
     background-image: url('background.jpg');
@@ -95,8 +96,8 @@
 
   /* Message */
   p {
+    margin: 0;
     text-align: left;
-    margin: 20px auto;
     max-width: 90%;
     font-size: 1.3em;
     line-height: 1.4;
