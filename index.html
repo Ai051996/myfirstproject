@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Baloo 2', cursive, Arial, sans-serif;
+    font-style: italic;            /* Make text italic */
+    color: white;                 /* Orange color */
+    font-size: 1.5em;
+    overflow-x: hidden;
+    text-align: center;
+    background: orange; /* remove background color */
+    animation: glow 2.5s ease-in-out infinite alternate;
+  }
+
+  /* Start Screen */
+  #startScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #000000aa; /* semi-transparent dark overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    color: white;
+
+  }
+  #startBtn {
+    padding: 20px 40px;
+    font-size: 24px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px #cc7000;
+  }
+  #startBtn:hover { background-color: #e67e22; }
+
+  /* Main Content (hidden initially) */
+  #mainContent {
+    display: none;
+    opacity: 0;
+    transition: opacity 2s ease;
+    background-image: url('background.jpg'); /* change to your image path or URL */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding-bottom: 50px;
+  }
+  #mainContent.show {
+    display: block;
+    opacity: 1;
+  }
+
+  h1 {
+  font-weight: bold;             /* Make text bold */
+  font-style: italic;            /* Make text italic */
+  color: white;                 /* Orange color */
+  font-size: 3.5em;
+  margin-top: 80px;
+  text-shadow: 0 0 12px #ff6f61;
+  animation: glow 2.5s ease-in-out infinite alternate;
+}
+
+/* Glow animation (existing example animation) */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 12px #ffa500, 0 0 24px #ffa500;
+  }
+  to {
+    text-shadow: 0 0 24px #ff8c00, 0 0 48px #ff8c00;
+  }
+}
+
+
+  p {
+    text-align: left;      /* align text left */
+    margin-left: 800px;     /* add space from left edge */
+    max-width: 600px;      /* keep max width for readability */
+    font-size: 1.6em;
+    line-height: 1.4;
+    font-weight: 600;
+    animation: glow 2.5s ease-in-out infinite alternate;
+  }
+  strong { color: #d84315; }
+  .signature {
+    text-align: right;
+    margin-right: 50px;
+    margin-top: 50px;
+    font-size: 1.6em;
+    color: white;
+    font-style: italic;
+    text-shadow: 0 0 5px black;
+    animation: glow 2.5s ease-in-out infinite alternate;
+  }
+
+  /* Confetti */
+  .confetti {
+    pointer-events: none;
+    position: fixed;
+    opacity: 0.9;
+    z-index: 9999;
+    border-radius: 3px;
+  }
+  @keyframes confettiFall {
+    to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Balloons */
+  .balloon {
+    position: fixed;
+    bottom: -150px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.85;
+    animation-name: floatUp;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    z-index: 10;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-150vh) rotate(15deg); }
+    100% { transform: translateY(-300vh) rotate(0deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Start Screen -->
+<div id="startScreen">
+  <h1>🎉 Ready for a surprise? 🎂</h1>
+  <button id="startBtn">Click to Start 🎵</button>
+</div>
+
+<!-- Main Content -->
+<div id="mainContent">
+  <h1>🎉 Happiest Birthday! 🎂</h1>
+  <p>
+    Wishing you a fantastic birthday filled with joy, laughter, and good health!<br>
+    Today, I’m gifting you this adorable little bike toy 🚲💝… <br>
+    And someday, I’ll gift you a real one!  💖
+  </p>
+  <div class="signature">With love ❤️,<br>Your Aishu</div>
+</div>
+
+<!-- Local MP3 -->
+<audio id="birthday-music" loop>
+  <source src="happy-birthday.mp3" type="audio/mpeg" />
+</audio>
+
+<script>
+  const colors = ["#f44336","#ffeb3b","#4caf50","#2196f3","#9c27b0","#ff9800","#009688","#e91e63"];
+  const balloonColors = ["#E91E63","#9C27B0","#673AB7","#3F51B5","#2196F3","#00BCD4","#4CAF50","#FFEB3B","#FFC107","#FF5722"];
+
+  function createConfetti() {
+    for (let i = 0; i < 100; i++) {
+      const c = document.createElement("div");
+      c.classList.add("confetti");
+      c.style.width = c.style.height = (5 + Math.random() * 7) + "px";
+      c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      c.style.left = Math.random() * window.innerWidth + "px";
+      c.style.top = "-10px";
+      c.style.animation = `confettiFall ${3 + Math.random()*3}s linear ${Math.random()*5}s infinite`;
+      document.body.appendChild(c);
+    }
+  }
+
+  function createBalloons() {
+    for (let i = 0; i < 15; i++) {
+      const b = document.createElement("div");
+      b.classList.add("balloon");
+      b.style.background = `radial-gradient(circle at 20% 30%, ${
+        balloonColors[Math.floor(Math.random() * balloonColors.length)]
+      }, #b71c1c)`;
+      b.style.left = Math.random() * window.innerWidth + "px";
+      b.style.width = 40 + Math.random() * 30 + "px";
+      b.style.height = 55 + Math.random() * 45 + "px";
+      b.style.animationDuration = 8 + Math.random() * 8 + "s";
+      b.style.animationDelay = Math.random() * 5 + "s";
+      document.body.appendChild(b);
+    }
+  }
+
+  document.getElementById('startBtn').addEventListener('click', () => {
+    document.getElementById('startScreen').style.display = 'none';
+    const mainContent = document.getElementById('mainContent');
+    mainContent.classList.add('show');
+    createConfetti();
+    createBalloons();
+    document.getElementById('birthday-music').play()
+      .catch(err => alert('Playback blocked. Please check your browser settings.'));
+  });
+</script>
+
+</body>
+</html>
